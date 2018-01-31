@@ -4,17 +4,24 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-import { MoviePosterComponent } from './movie-poster/movie-poster.component';
+import { SharedModule } from './shared/shared.module';
+import { LoginModule } from 'app/login/login.module';
+import { AppRoutingModule } from 'app/app-routing.module';
+import { HomeModule } from './home/home.module';
+// import { MoviePosterComponent } from './movie-poster/movie-poster.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    MoviePosterComponent
+    AppComponent    
   ],
   imports: [
+    SharedModule,
     BrowserModule,
-    CoreModule
+    CoreModule,
+    AppRoutingModule,
+    LoginModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
