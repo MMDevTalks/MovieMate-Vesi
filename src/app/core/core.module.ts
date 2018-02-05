@@ -6,6 +6,10 @@ import { SharedModule } from 'app/shared/shared.module';
 import { SearchComponent } from './search/search.component';
 import { AuthService } from 'app/core/service/auth.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthGuard } from './guards/auth.guard';
+import { AccountService } from './service/account.service';
+import { APP_INITIALIZER } from '@angular/core';
+import { accountLoader } from 'app/core/account.loader';
 //import { MovieService } from '@movies/services';
 //import { SharedModule } from '@movies/shared';
 
@@ -17,7 +21,15 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   providers: [
     MovieService,
-    AuthService
+    AuthService,
+    AuthGuard,
+    AccountService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: accountLoader,
+      deps: [AuthService],
+      multi: true
+    }
   ],
   declarations: [
   ],

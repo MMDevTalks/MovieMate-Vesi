@@ -1,0 +1,58 @@
+@import 'settings.colors';
+@import 'settings.fonts';
+:host-context(.mm-button--big){
+    .button{
+        padding: 20px;
+        /deep/ svg{
+            margin-right: 10px;
+        }
+    }
+}
+:host-context(.mm-button--medium){
+    .button{
+        padding: 10px;
+        /deep/ svg{
+            margin-right: 10px;
+        }
+    }
+}
+:host-context(.mm-button--inverted){
+    .button{
+        border: 1px solid #fff;
+        color: #fff;
+        /deep/ svg{
+            fill: #fff;
+        }
+    }
+}
+.button{
+    background: none;
+    border: 1px solid $mainColor;
+    border-radius: 3px;
+    color: $mainColor;
+    font-size: $fontSizeSmall;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    cursor: pointer;
+    &:hover:not(:disabled){
+        color: #fff;
+        transition: 0.25s all;
+        background: $mainColor;
+        /deep/ svg{
+            fill: #fff;
+        }
+    }
+    &:disabled{
+        opacity: 0.4;
+    }
+    /deep/ svg{
+        vertical-align: middle;
+        fill: $mainColor;
+        margin-right: 2px;
+        width: 15px;
+        height: 15px;
+    }
+}
