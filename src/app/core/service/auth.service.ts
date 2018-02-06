@@ -26,7 +26,7 @@ export class AuthService {
     let params = new HttpParams();
     params = params.set('api_key', API_KEY);
     params = params.set('request_token', request_token);
-    return this._http.get(`https://api.themoviedb.org/3/authentication/token/new`, { params })
+    return this._http.get(`https://api.themoviedb.org/3/authentication/session/new`, { params })
     .mergeMap((response:any)=>{
       localStorage.setItem('session_id', response.session_id);
       return this.getAccountAsync();

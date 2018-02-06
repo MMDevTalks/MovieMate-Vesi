@@ -3,11 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from 'app/login/login.component';
 import { HomeComponent } from 'app/home/home.component';
 import { AuthGuard } from 'app/core/guards/auth.guard';
+import { AnonymousGuard } from 'app/core/guards/anonymous.guard';
 
 const routes: Routes = [
     {
         path: 'login',
-        component: LoginComponent
+        loadChildren: './login/login.module#LoginModule',
+        canActivate: [AnonymousGuard]
     },
     {
         path: 'home',

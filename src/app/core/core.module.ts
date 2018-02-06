@@ -10,6 +10,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { AccountService } from './service/account.service';
 import { APP_INITIALIZER } from '@angular/core';
 import { accountLoader } from 'app/core/account.loader';
+import { AnonymousGuard } from 'app/core/guards/anonymous.guard';
 //import { MovieService } from '@movies/services';
 //import { SharedModule } from '@movies/shared';
 
@@ -24,6 +25,7 @@ import { accountLoader } from 'app/core/account.loader';
     AuthService,
     AuthGuard,
     AccountService,
+    AnonymousGuard,
     {
       provide: APP_INITIALIZER,
       useFactory: accountLoader,
