@@ -11,10 +11,7 @@ export class AccountService {
   }
 
   public getAccount(): Observable<any> {
-    let params = new HttpParams();
-    params = params.set('api_key', API_KEY);
-    params = params.set('session_id', localStorage.getItem('session_id'));
-    return this._http.get('https://api.themoviedb.org/3/account', { params });
+    return this._http.get('account');
   }
 
 }

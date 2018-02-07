@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from 'app/core/guards/auth.guard';
 import { AnonymousGuard } from 'app/core/guards/anonymous.guard';
 import { PreloadAllModules } from '@angular/router';
+import { ProxyRouteComponent } from 'app/proxy-route/proxy-route.component';
 
 const routes: Routes = [
     {
@@ -14,6 +15,17 @@ const routes: Routes = [
         path: 'home',
         loadChildren: './home/home.module#HomeModule',
         canActivate: [AuthGuard]
+    },
+    {        
+        path: 'details',
+        outlet: 'sidebar',
+        component: ProxyRouteComponent,
+        children: [
+            {
+                path: '',
+                loadChildren: './details/details.module#DetailsModule',
+            }
+        ]
     }
 ];
 

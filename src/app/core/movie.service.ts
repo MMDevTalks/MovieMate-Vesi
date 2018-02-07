@@ -14,8 +14,7 @@ export class MovieService {
   
   getNowPlayingMovies() : Observable<any>{
     let params = new HttpParams();
-    params = params.set('api_key', API_KEY);
-    return this._http.get('https://api.themoviedb.org/3/movie/now_playing', {params})
+    return this._http.get('movie/now_playing')
     .map((response: any) =>
       response.results
     );
