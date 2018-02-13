@@ -22,19 +22,20 @@ export class AuthService {
       location.href = `${environment.THEMOVIE_DB_BASE_URL}/authenticate/${token}?redirect_to=${redirectTo}`
     });
   }
-  getSession(request_token: string){
+
+  getSession(request_token: string) {
     let params = new HttpParams();
     params = params.set('request_token', request_token);
     return this._http.get(`authentication/session/new`, { params })
-    .mergeMap((response:any)=>{
-      localStorage.setItem('session_id', response.session_id);
-      return this.getAccountAsync();
-    })
+      .mergeMap((response: any) => {
+        localStorage.setItem('session_id', response.session_id);
+        return this.getAccountAsync();
+      });
   }
 
-  getAccountAsync(){
+  getAccountAsync() {
     return this._accountService.getAccount().map(account => {
       this.currentAccount$.next(account);
-    })
+     });
   }
 }

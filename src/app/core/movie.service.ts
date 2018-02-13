@@ -8,15 +8,17 @@ const API_KEY = 'f719b5bbee3a1a55e2276847cda9fb27';
 @Injectable()
 export class MovieService {
 
-  constructor(private _http: HttpClient) {
-
-   }
+  constructor(private _http: HttpClient) {   }
   
-  getNowPlayingMovies() : Observable<any>{
+  getNowPlayingMovies() {
     let params = new HttpParams();
     return this._http.get('movie/now_playing')
     .map((response: any) =>
       response.results
     );
+  }
+
+  getMovieById(id: string) {
+    return this._http.get(`movie/${id}`);
   }
 }

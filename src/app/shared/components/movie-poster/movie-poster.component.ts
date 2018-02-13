@@ -8,6 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter, HostBinding} from '@ang
 export class MoviePosterComponent implements OnInit {
   @Input() movie:any = {};
   @Output() selectMovie: EventEmitter<any> = new EventEmitter();
+  @Output() movieDetailsShown: EventEmitter<any> = new EventEmitter();
   @HostBinding('class.movie-poster--active') @Input() isSelected = false;
   constructor() { }
 
@@ -16,4 +17,7 @@ export class MoviePosterComponent implements OnInit {
   clickMoviePoster($event, movie) {
     this.selectMovie.emit(movie);
   };
+  showMovieDetails(movie: any){
+    this.movieDetailsShown.emit(movie);
+  }
 }

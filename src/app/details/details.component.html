@@ -6,11 +6,11 @@
       <a class="details__navigation-item">Similar</a>
       <a class="details__navigation-item">Recommended</a>
   </div> -->
-  <div (click)="$event.stopPropagation()"> 
-      <div class="details__title">{{(movie$|async)?.title}}</div>
+  <div (click)="$event.stopPropagation()" *ngIf="(movie$|async) as movie"> 
+      <div class="details__title">{{movie.title}}</div>
       <div class="details__cover" #movieCover></div>
-      <img class="details__image large" (extractColors)="morphBackground($event)" crossOrigin="Anonymous" mmColorExtractor [src]="'https://image.tmdb.org/t/p//w300/'+(movie$|async)?.posterPath">
-      <div class="details__description">{{(movie$|async)?.overview}}</div>
+      <img class="details__image large" mmColorExtractor (colorsExtracted)="morphBackground($event)" [src]="'https://image.tmdb.org/t/p//w300/'+movie.poster_path">
+      <div class="details__description">{{movie.overview}}</div>
   </div>
     
 </article>
