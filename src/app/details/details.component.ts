@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MovieService } from 'app/core/movie.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 import { Element } from '@angular/compiler';
 import { Colors } from 'app/shared/directives/color-extractor.directive';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'mm-details',
@@ -14,7 +15,15 @@ import { Colors } from 'app/shared/directives/color-extractor.directive';
 export class DetailsComponent implements OnInit {
   @ViewChild('movieCover') movieCover: ElementRef;
   movie$: Observable<any>;
-  constructor(private _route: ActivatedRoute, private _movieService: MovieService) {
+  @HostListener('document:keydown', ['$event'])close (event: KeyboardEvent){
+    if (event.keyCode === 27){
+       this.closeSelf();
+    }
+  }
+  constructor(private _route: ActivatedRoute, private _movieService: MovieService, private _router: Router) {
+  }
+  closeSelf(){
+    this._router.navigate([{ outlets: {'sidebar': null } }])
   }
 
   morphBackground(colors: Colors) {

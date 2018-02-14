@@ -6,12 +6,13 @@
       <a class="details__navigation-item">Similar</a>
       <a class="details__navigation-item">Recommended</a>
   </div> -->
-  <div (click)="$event.stopPropagation()" *ngIf="(movie$|async) as movie"> 
+  <div (click)="$event.stopPropagation()" *ngIf="(movie$|async) as movie; else loading"> 
       <div class="details__title">{{movie.title}}</div>
       <div class="details__cover" #movieCover></div>
-      <img class="details__image large" mmColorExtractor (colorsExtracted)="morphBackground($event)" [src]="'https://image.tmdb.org/t/p//w300/'+movie.poster_path">
+      <img class="details__image large" mmColorExtractor (colorsExtracted)="morphBackground($event)" crossorigin="Anonymous" [src]="'https://image.tmdb.org/t/p//w300/'+movie.poster_path">
       <div class="details__description">{{movie.overview}}</div>
   </div>
-    
+  <ng-template #loading>
+    <mm-spinner class="big"></mm-spinner>
+  </ng-template>
 </article>
-<!-- <mm-spinner class="big" *ngIf="loading"></mm-spinner> -->

@@ -5,12 +5,13 @@ import { SvgDefinitionsComponent } from './components/svg-definitions/svg-defini
 import { IconComponent } from './components/icon/icon.component';
 import { ButtonComponent } from './components/button/button.component';
 import { ColorExtractorDirective } from './directives/color-extractor.directive';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   imports: [
     CommonModule
   ],
-  declarations: [MoviePosterComponent, SvgDefinitionsComponent, IconComponent, ButtonComponent, ColorExtractorDirective],
-  exports: [MoviePosterComponent, SvgDefinitionsComponent, IconComponent, ButtonComponent, ColorExtractorDirective]
+  declarations: [MoviePosterComponent, SvgDefinitionsComponent, IconComponent, ButtonComponent, ColorExtractorDirective, SpinnerComponent],
+  exports: [MoviePosterComponent, SvgDefinitionsComponent, IconComponent, ButtonComponent, ColorExtractorDirective, SpinnerComponent]
 })
 export class SharedModule { }
