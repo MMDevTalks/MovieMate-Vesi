@@ -13,21 +13,34 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
   public movie$: Observable<Array<any>>;
   public selectedMovie: any;
+  public isCollecting: boolean = false;
+  public collectedMovies: Array<any> = [];
+  public isFormShown = false;
 
   constructor(private _movieService: MovieService, private _router: Router){  }
 
   selectMovie(movie){
-    this.selectedMovie = movie;
+    if(this.isCollecting){
+      if ( this.collectedMovies.indexOf(movie) === -1){
+        this.collectedMovies = [...this.collectedMovies, movie];
+      }
+    }else{
+      this.selectedMovie = movie;
+    }
   }
 
   showMovieDetails(movie){
     this._router.navigate([{ outlets: {'sidebar': `details/${movie.id}` } }])
+  }
+  showForm(){
+    this.isFormShown = true;
   }
 
   ngOnInit(){
     this.movie$ = this._movieService.getNowPlayingMovies();
   }
 
-  ngOnDestroy(){  }
-
+  toggleCollecting(){
+    this.isCollecting = !this.isCollecting;
+  }
 }
