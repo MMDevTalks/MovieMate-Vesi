@@ -14,9 +14,12 @@ export class MoviePosterComponent implements OnInit {
 
   ngOnInit() {
   }
-  clickMoviePoster($event, movie) {
+  clickMoviePoster(event: Event, movie, doNotPropagate?: boolean) {
+    if (doNotPropagate) {
+      event.stopPropagation();
+    }
     this.selectMovie.emit(movie);
-  };
+  }
   showMovieDetails(movie: any){
     this.movieDetailsShown.emit(movie);
   }
