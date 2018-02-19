@@ -1,17 +1,11 @@
-import { Component, OnInit, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, OnInit, forwardRef, Self } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
 
 @Component({
   selector: 'mm-expandable-textarea',
   templateUrl: './expandable-textarea.component.html',
   styleUrls: ['./expandable-textarea.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ExpandableTextareaComponent),
-      multi: true,
-    }
-  ]
+  providers: []
 })
 export class ExpandableTextareaComponent implements OnInit, ControlValueAccessor{
   value: string;
@@ -37,7 +31,9 @@ export class ExpandableTextareaComponent implements OnInit, ControlValueAccessor
   focus(){
     this.onTouched();
   }
-  constructor() { }
+  constructor( @Self() public controlDirective: NgControl) { 
+    controlDirective.valueAccessor = this;
+  }
 
   ngOnInit() {
   }

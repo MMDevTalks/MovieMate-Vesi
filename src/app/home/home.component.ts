@@ -5,13 +5,17 @@ import { Subscription } from 'rxjs/Subscription';
 import { Route } from '@angular/router/src/config';
 import { Router } from '@angular/router';
 import { ICreateList } from '../shared/interfaces/icreate-list';
+import { trigger, animate, keyframes, style, transition } from '@angular/animations';
+import { popIn } from 'app/shared/animations/pop-in.animation';
 
 @Component({
   selector: 'mm-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  animations: [ popIn(0.5)]
 })
 export class HomeComponent implements OnInit {
+  shouldAnimate = 'out';
   public movie$: Observable<Array<any>>;
   public selectedMovie: any;
   public isCollecting: boolean = false;
@@ -46,4 +50,5 @@ export class HomeComponent implements OnInit {
   toggleCollecting(){
     this.isCollecting = !this.isCollecting;
   }
+
 }
