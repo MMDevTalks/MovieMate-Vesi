@@ -7,6 +7,6 @@
       </mm-movie-poster>
     </section>
     <mm-fab (click)="toggleCollecting()" iconName="add_to_list"></mm-fab>
-    <mm-add-to-list-form class="col-xs-12" *ngIf="isFormShown"></mm-add-to-list-form>
+    <mm-add-to-list-form class="col-xs-12" *ngIf="isFormShown" [movies]="collectedMovies" (formSubmitted)="createList($event)" (formClosed)="isFormShown = false;"></mm-add-to-list-form>
   </main>
 </section>

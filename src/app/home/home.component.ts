@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { Route } from '@angular/router/src/config';
 import { Router } from '@angular/router';
+import { ICreateList } from '../shared/interfaces/icreate-list';
 
 @Component({
   selector: 'mm-home',
@@ -35,7 +36,9 @@ export class HomeComponent implements OnInit {
   showForm(){
     this.isFormShown = true;
   }
-
+  createList(creareList: ICreateList){
+    this._movieService.createList(creareList).subscribe();
+  }
   ngOnInit(){
     this.movie$ = this._movieService.getNowPlayingMovies();
   }
