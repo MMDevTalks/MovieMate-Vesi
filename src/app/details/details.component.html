@@ -1,11 +1,11 @@
 <article class="details">
     
   <mm-icon class="details__close-button" name="close"  (click)="closeSelf()"></mm-icon>
-  <!-- <div class="details__navigation">
+  <div class="details__navigation">
 
       <a class="details__navigation-item">Similar</a>
       <a class="details__navigation-item">Recommended</a>
-  </div> -->
+  </div>
   <div (click)="$event.stopPropagation()" *ngIf="(movie$|async) as movie; else loading"> 
       <div class="details__title">{{movie.title}}</div>
       <div class="details__cover" #movieCover></div>

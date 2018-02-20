@@ -1,9 +1,10 @@
+@import 'settings.colors';
 :host{
     display: block;
     &.ng-invalid:not(.ng-pristine){
         div{
-            color: red;
-            box-shadow: 0 1px 5px rgba(255, 0, 0, 0.59);
+            color: $errorTextColor;
+            box-shadow: 0 1px 5px $errorBoxShadow;
         }
     }
     .char-counter{
@@ -11,7 +12,7 @@
         bottom: 15px;
         right: 15px;
         &--invalid{
-            color: red;
+            color: $errorTextColor;
         }
     }
 }

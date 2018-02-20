@@ -1,19 +1,19 @@
 @import 'settings.colors';
 @import 'settings.fonts';
 .add-to-list-form{
-    background: #fff;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    background: $whiteColor;
+    box-shadow: 0 10px 15px $lightDarkBoxShadow, 0 6px 6px $darkBoxShadow;
     border-radius: 3px;
     overflow: hidden;
     &__header{
         padding: 15px 40px;
         height: 70px;
         background-color: $mainColor;
-        color: #fff;
+        color: $whiteColor;
         font-weight: normal;
         letter-spacing: 0.5px;
         /deep/ svg{
-            fill: #fff;
+            fill: $whiteColor;
             width: 20px;
             height: 20px;
         }

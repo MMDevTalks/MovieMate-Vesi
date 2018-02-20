@@ -18,10 +18,10 @@
 }
 :host-context(.mm-button--inverted){
     .button{
-        border: 1px solid #fff;
-        color: #fff;
+        border: 1px solid $whiteColor;
+        color: $whiteColor;
         /deep/ svg{
-            fill: #fff;
+            fill: $whiteColor;
         }
     }
 }
@@ -38,11 +38,11 @@
     outline: none;
     cursor: pointer;
     &:hover:not(:disabled){
-        color: #fff;
+        color: $whiteColor;
         transition: 0.25s all;
         background: $mainColor;
         /deep/ svg{
-            fill: #fff;
+            fill: $whiteColor;
         }
     }
     &:disabled{
