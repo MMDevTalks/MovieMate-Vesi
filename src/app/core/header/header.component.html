@@ -19,7 +19,7 @@
   <ng-container *ngIf="isCollecting">
     <div class="row col-xs-12 row--no-margin pl-20 pr-20 between-xs middle-xs">
       <div class="col-xs row">
-        <mm-movie-poster class="mr-20" *ngFor="let movie of collectables" [movie]="movie" >
+        <mm-movie-poster class="mr-20" *ngFor="let movie of collectables" [movie]="movie" @popInAnimation>
         </mm-movie-poster>
       </div>
 

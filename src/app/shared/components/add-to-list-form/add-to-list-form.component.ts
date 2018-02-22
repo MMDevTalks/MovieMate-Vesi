@@ -1,6 +1,8 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { ICreateList } from 'app/shared/interfaces/icreate-list';
 import { NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/debounceTime';
 
 @Component({
   selector: 'mm-add-to-list-form',
@@ -21,13 +23,17 @@ export class AddToListFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.addListForm.valueChanges
+      .filter(_=> this.addListForm.valid)
+      .debounceTime(1500)
+      .subscribe(formData => console.log(`Autosaving...`,formData))
   }
 
   createList(){
     if (this.addListForm.value.invalid){
       return;
     }
-    this.formSubmitted.emit(this.addListForm.value);
+    this.formSubmitted.emit( this.addListForm.value);
   }
   closeForm(){
     this.formClosed.emit();
