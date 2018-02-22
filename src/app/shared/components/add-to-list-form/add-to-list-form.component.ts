@@ -11,7 +11,7 @@ import 'rxjs/add/operator/debounceTime';
 })
 export class AddToListFormComponent implements OnInit {
   @Output() formClosed: EventEmitter<void> = new EventEmitter();
-  @Output() formSubmitted: EventEmitter<ICreateList> = new EventEmitter();
+  @Output() formSubmitted: EventEmitter<{ list: ICreateList, movies: Array<any> }> = new EventEmitter();
   @Input() movies: Array<any>;
   addListForm: FormGroup;
   constructor(private _fb: FormBuilder) {
@@ -33,7 +33,7 @@ export class AddToListFormComponent implements OnInit {
     if (this.addListForm.value.invalid){
       return;
     }
-    this.formSubmitted.emit( this.addListForm.value);
+    this.formSubmitted.emit({ list: this.addListForm.value, movies: this.movies });
   }
   closeForm(){
     this.formClosed.emit();
