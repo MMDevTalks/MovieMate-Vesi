@@ -1,5 +1,5 @@
 import { Directive, ElementRef, EventEmitter, HostListener, Output, ViewChild } from '@angular/core';
-import Vibrant from 'node-vibrant';
+const Vibrant = require('node-vibrant');
 export interface Colors {
   DarkVibrant: string;
   Vibrant: string;
