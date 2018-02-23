@@ -20,9 +20,22 @@ function filterFn<T>(this: Observable<T>, condition: Function): Observable<T>{
     return outputObservable;
 }
 
+function delayFn<T>(this: Observable<T>, duration: number): Observable<T>{
+    const inputObservable = this;
+    const outputObservable = Observable.create((observer) => {
+        return inputObservable.subscribe(new Observer((data => {
+            setTimeout(() => {
+                observer.next(data);
+            }, duration );      
+        })))
+    })
+    return outputObservable;
+}
+
 class Observable<T>{
-    public map: (trasformFn:Function) => Observable<T> = mapFn;
-    public filterFn: (condition:Function) => Observable<T> = mapFn;
+    public map: (trasformFn: Function) => Observable<T> = mapFn;
+    public filter: (condition: Function) => Observable<T> = filterFn;
+    public delay: (duration: number) => Observable<T> = delayFn;
     constructor(public subscribe: ((obsever: Observer<T>) => any)){   }
     static create<T>(subscribe: ((observer: Observer<T>) => any)){
         return new Observable(subscribe);
@@ -42,8 +55,9 @@ Observable.create((observer) => {
     observer.next(2);
     observer.next(3);
 })
-    .map(x => x * 2)
-    .filterFn(x => x > 5)
+    .map(x => x * 5)
+    .filter(x => x > 5)
+    .delay(500)
     .subscribe(new Observer((data) =>{
         console.log(data);
     }));
