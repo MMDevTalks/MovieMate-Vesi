@@ -64,7 +64,7 @@
     &__image{
         width: 250px;
         position: absolute;
-        top: 120px;
+        top: 140px;
         right: 50%;
         box-shadow: 0 14px 28px $posterActiveBoxShadow, 0 10px 10px $darkBoxShadow;
         transform: translateX(50%);
@@ -82,7 +82,7 @@
         right: 30px;
         z-index: 2;
         /deep/ svg{
-            fill: $darkSymbolColor;
+            fill: $whiteColor;
             width: 25px;
             height: 25px;
         }
