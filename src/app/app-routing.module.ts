@@ -26,6 +26,11 @@ const routes: Routes = [
                 loadChildren: './details/details.module#DetailsModule',
             }
         ]
+    },
+    {
+        path: '',
+        redirectTo: '/home',
+        pathMatch: 'full'
     }
 ];
 

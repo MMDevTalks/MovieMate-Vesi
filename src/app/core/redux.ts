@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-export const StoreToken = new InjectionToken<Store>('Redux');
+
 export function createStore(reducer: Function, initialState?: any) {
     let _currentState = initialState;
     const _subscribers: Array<Function> = [];

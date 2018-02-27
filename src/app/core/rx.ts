@@ -33,7 +33,7 @@ function delayFn<T>(this: Observable<T>, duration: number): Observable<T>{
     return outputObservable;
 }
 
-class Observable<T>{
+export class Observable<T>{
     public map: (trasformFn: Function) => Observable<T> = mapFn;
     public filter: (condition: Function) => Observable<T> = filterFn;
     public delay: (duration: number) => Observable<T> = delayFn;
@@ -42,7 +42,7 @@ class Observable<T>{
         return new Observable(subscribe);
     }
 }
-class Observer<T>{
+export class Observer<T>{
     constructor(
         public next: (value: T) => void,
         public error?: (err: any) => void,
