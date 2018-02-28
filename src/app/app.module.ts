@@ -9,8 +9,10 @@ import { AppRoutingModule } from 'app/app-routing.module';
 import { ProxyRouteComponent } from './proxy-route/proxy-route.component';
 // import { MoviePosterComponent } from './movie-poster/movie-poster.component';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { home } from './home/home.reducer';
+import { routerReducer, StoreRouterConnectingModule, RouterStateSerializer} from '@ngrx/router-store';
+import { CustomSerializer } from 'app/utils/router.serializer';
 
 @NgModule({
   declarations: [
@@ -24,12 +26,19 @@ import { home } from './home/home.reducer';
     CoreModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({ home }),
+    StoreModule.forRoot({ routerReducer}),
     StoreDevtoolsModule.instrument({
       maxAge: 25
-    })
+    }),
+    StoreRouterConnectingModule,
+    EffectsModule.forRoot([])
   ],
-  providers: [],
+  providers: [
+    {
+      provide: RouterStateSerializer,
+      useClass: CustomSerializer
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

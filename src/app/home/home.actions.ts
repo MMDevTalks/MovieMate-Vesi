@@ -13,6 +13,6 @@ export class GetMovies implements Action {
 }
 export class GetMoviesSuccess implements Action {
     readonly type = GET_MOVIES_SUCCESS;
-    constructor (public payload: Array<any> ){}
+    constructor ( public payload: Array<any> ){}
 }
 export type All = SelectMovie | GetMovies | GetMoviesSuccess;

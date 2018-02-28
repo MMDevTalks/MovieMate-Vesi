@@ -1,5 +1,4 @@
 import { Component, OnInit, Inject, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { MovieService } from 'app/core/movie.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Route } from '@angular/router/src/config';
 import { Router } from '@angular/router';
@@ -28,7 +27,6 @@ export class HomeComponent implements OnInit {
   public loading = false;
 
   constructor(private _cd: ChangeDetectorRef, 
-    private _movieService: MovieService, 
     private _router: Router, 
     private _store: Store<fromHome.State>
   ) {}
@@ -43,15 +41,15 @@ export class HomeComponent implements OnInit {
   showForm(){
     this.isFormShown = true;
   }
-  createList(creareList: ICreateList){
-    this._movieService.createList(creareList).subscribe();
-  }
+  // createList(creareList: ICreateList){
+  //   this._movieService.createList(creareList).subscribe();
+  // }
   ngOnInit(){
     this.homeState$ = this._store.select('home');
     this._store.dispatch( new HomeAction.GetMovies());
-    this._movieService.getNowPlayingMovies().subscribe(response => {
-      this._store.dispatch(new HomeAction.GetMoviesSuccess(response));
-    });
+    // this._movieService.getNowPlayingMovies().subscribe(response => {
+    //   this._store.dispatch(new HomeAction.GetMoviesSuccess(response));
+    // });
   }
 
   toggleCollecting(){
