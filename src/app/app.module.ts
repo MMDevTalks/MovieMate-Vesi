@@ -8,7 +8,9 @@ import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from 'app/app-routing.module';
 import { ProxyRouteComponent } from './proxy-route/proxy-route.component';
 // import { MoviePosterComponent } from './movie-poster/movie-poster.component';
-
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { home } from './home/home.reducer';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,11 @@ import { ProxyRouteComponent } from './proxy-route/proxy-route.component';
     BrowserModule,
     CoreModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    StoreModule.forRoot({ home }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

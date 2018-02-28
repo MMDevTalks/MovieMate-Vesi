@@ -13,16 +13,11 @@ import { accountLoader } from 'app/core/account.loader';
 import { AnonymousGuard } from 'app/core/guards/anonymous.guard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from 'app/core/service/auth.interceptor';
-import { create } from 'domain';
-import { createStore } from 'app/core/redux';
-import { movies } from 'app/core/movie.reducer'
-import { Store$, StoreToken } from 'app/core/store$'
+
 //import { MovieService } from '@movies/services';
 //import { SharedModule } from '@movies/shared';
 
-export const getStore = () =>{
-  return new Store$(createStore(movies, {}));
-}
+
 @NgModule({
   imports: [
     SharedModule,
@@ -45,12 +40,6 @@ export const getStore = () =>{
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    },
-    {
-      provide: StoreToken,
-      useFactory: () => {
-        return getStore();
-      }
     }
   ],
   declarations: [

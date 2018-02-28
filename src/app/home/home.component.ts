@@ -6,9 +6,10 @@ import { Router } from '@angular/router';
 import { ICreateList } from '../shared/interfaces/icreate-list';
 import { trigger, animate, keyframes, style, transition } from '@angular/animations';
 import { popIn } from 'app/shared/animations/pop-in.animation';
-import { Store} from 'app/core/redux';
-import { StoreToken, Store$ } from 'app/core/store$';
-import { Observable } from 'app/core/rx';
+import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
+import * as fromHome from './home.reducer';
+import * as HomeAction from './home.actions';
 
 @Component({
   selector: 'mm-home',
@@ -19,7 +20,7 @@ import { Observable } from 'app/core/rx';
 })
 export class HomeComponent implements OnInit {
   shouldAnimate = 'out';
-  public homeState$: Observable<Array<any>>;
+  public homeState$: Observable<fromHome.HomeState>;
   public selectedMovie: any;
   public isCollecting: boolean = false;
   public collectedMovies: Array<any> = [];
@@ -27,17 +28,13 @@ export class HomeComponent implements OnInit {
   public loading = false;
 
   constructor(private _cd: ChangeDetectorRef, 
-    private _movieService: MovieService, private _router: Router, @Inject(StoreToken) private _store$: Store$) {  }
+    private _movieService: MovieService, 
+    private _router: Router, 
+    private _store: Store<fromHome.State>
+  ) {}
 
   selectMovie(movie){
-    // if(this.isCollecting){
-    //   if ( this.collectedMovies.indexOf(movie) === -1){
-    //     this.collectedMovies = [...this.collectedMovies, movie];
-    //   }
-    // }else{
-    //   this.selectedMovie = movie;
-    // }
-    this._store$.dispatch({ type: 'SELECT_MOVIE', payload: movie });
+    this._store.dispatch(new HomeAction.SelectMovie(movie));
   }
 
   showMovieDetails(movie){
@@ -50,18 +47,10 @@ export class HomeComponent implements OnInit {
     this._movieService.createList(creareList).subscribe();
   }
   ngOnInit(){
-    //this.movie$ = this._movieService.getNowPlayingMovies();
-    // this._store$.subscribe(()=> {
-    //   console.log(this._store$.getState());
-    //   this.movies = this._store$.getState().movies;
-    //   this.loading = this._store$.getState().loading;
-    //   this.selectedMovie = this._store$.getState().selectedMovie;
-    //   this._cd.markForCheck();
-    // })
-    this.homeState$ = this._store$.state$.map( homeState => { homeState.movies[0].overview = 'hey hey'; return homeState; });
-    this._store$.dispatch({ type: 'GET_MOVIES'});
+    this.homeState$ = this._store.select('home');
+    this._store.dispatch( new HomeAction.GetMovies());
     this._movieService.getNowPlayingMovies().subscribe(response => {
-      this._store$.dispatch({ type: 'GET_MOVIES_SUCCESS', payload: response });
+      this._store.dispatch(new HomeAction.GetMoviesSuccess(response));
     });
   }
 
